@@ -42,7 +42,12 @@
     var show = function(){ var r = REVIEWS[i]; txt.textContent = "“" + r.short + "”"; by.textContent = r.name + ", " + r.who; };
     show();
     if(!matchMedia("(prefers-reduced-motion: reduce)").matches){
+      // Rotation pauses while the quote is hovered or focused.
+      var held = false;
+      ["mouseenter","focusin"].forEach(function(ev){ hq.addEventListener(ev, function(){ held = true; }); });
+      ["mouseleave","focusout"].forEach(function(ev){ hq.addEventListener(ev, function(){ held = false; }); });
       setInterval(function(){
+        if(held || document.hidden) return;
         hq.classList.add("out");
         setTimeout(function(){ i = (i + 1) % REVIEWS.length; show(); hq.classList.remove("out"); }, 350);
       }, 5500);

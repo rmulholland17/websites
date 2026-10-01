@@ -73,7 +73,7 @@ p{margin:0}
 .ticket-edge{height:6px;background:linear-gradient(90deg,var(--heat),#E9A13B 22%,var(--chill) 62%,var(--glacier))}
 .ticket-body{padding:26px 26px 24px;display:grid;gap:20px}
 .live{display:flex;align-items:center;gap:10px;font:600 .78rem/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
-.dot{width:9px;height:9px;border-radius:50%;background:#1E9E5A;box-shadow:0 0 0 0 rgba(30,158,90,.5);animation:pulse 2s infinite}
+.dot{width:9px;height:9px;border-radius:50%;background:#1E9E5A;box-shadow:0 0 0 0 rgba(30,158,90,.5);animation:pulse 2s 2}
 @keyframes pulse{70%{box-shadow:0 0 0 9px rgba(30,158,90,0)}100%{box-shadow:0 0 0 0 rgba(30,158,90,0)}}
 .bignum{font:700 clamp(2.1rem,4.2vw,2.7rem)/1 var(--display);letter-spacing:.02em}
 .bignum small{display:block;font:600 .85rem/1.2 var(--mono);color:var(--glacier);letter-spacing:.1em;margin-top:8px}
@@ -400,3 +400,8 @@ body{font-size:18px;line-height:1.65}
 .town-links{margin-top:26px;align-items:center}
 .town-links span{font-weight:600;color:var(--ink-2);margin-right:4px}
 @media (max-width:560px){.area-list{grid-template-columns:1fr 1fr;gap:8px}.area-list li{padding:10px 10px;font-size:.98rem;line-height:1.25}}
+
+/* Review links under the rotating hero quotes (2026-10-01: replaced the pause button) */
+.hq-links{margin:12px 0 0;display:flex;flex-wrap:wrap;gap:8px 22px;font-weight:600}
+.hq-links a{color:var(--glacier);text-underline-offset:3px}
+.hq-links a:hover{color:var(--ink)}
