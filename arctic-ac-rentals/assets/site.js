@@ -83,36 +83,6 @@
     });
   });
 
-  // Rental request form. On the real domain it posts to Netlify Forms; elsewhere (previews) it
-  // opens a Gmail draft and always shows a fallback so a request is never silently lost.
-  var LIVE = /(^|\.)arcticacrentals\.com$/.test(location.hostname);
-  document.querySelectorAll("form.req").forEach(function(f){
-    f.addEventListener("submit", function(ev){
-      if(LIVE) return;
-      ev.preventDefault();
-      var d = new FormData(f);
-      var name = (d.get("name")||"").trim(), phone = (d.get("phone")||"").trim(), where = (d.get("where")||"").trim();
-      var need = d.get("need") || "";
-      var SITUATION = {
-        "AC is out at my home": "My AC just went out at home and I'd like to rent a portable unit to get us through until it's fixed.",
-        "AC is out in a condo or rental": "The AC is out in my condo/rental and I'd like to rent a portable unit to keep it cool until it's repaired.",
-        "Need extra cooling for a room": "I need extra cooling for a room and I'd like to rent a portable AC unit.",
-        "Planning ahead": "I'm planning ahead and would like to set up a portable AC rental."
-      };
-      var body = "Hi Arctic AC Rentals,\n\n" +
-                 (SITUATION[need] || "I'd like to rent a portable AC unit.") + "\n\n" +
-                 "I'm located at " + (where || "[add your address]") + ". " +
-                 "What's the soonest you can deliver and set it up? The best way to reach me is " + (phone || "[your phone]") + ".\n\n" +
-                 "Thank you,\n" + (name || "") + "\n\n" +
-                 "---\nName: " + name + "\nPhone: " + phone + "\nAddress: " + where + "\nSituation: " + need;
-      // Riley's call: compose in Gmail (web) instead of launching a desktop email app via mailto.
-      var href = "https://mail.google.com/mail/?view=cm&fs=1&to=" + EMAIL + "&su=" + encodeURIComponent("AC rental request: " + (d.get("where")||d.get("name")||"")) +
-                 "&body=" + encodeURIComponent(body);
-      try { window.open(href, "_blank", "noopener"); } catch(e){}
-      var msg = f.querySelector(".req-done");
-      msg.hidden = false;
-      msg.querySelector("pre").textContent = body;
-      msg.querySelector("[data-copy-body]").onclick = function(){ copy("To: " + EMAIL + "\n\n" + body, this); };
-    });
-  });
+  // Rental request form: plain POST to the Cloudflare function at /api/contact (emails the
+  // business; samples send to Harbor Sites), which redirects to thank-you.html. No JS needed.
 })();

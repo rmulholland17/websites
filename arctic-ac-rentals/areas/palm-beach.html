@@ -62,9 +62,10 @@
           <h2 class="req-h" id="req-h">Get a unit today</h2>
           <p class="req-sub">Send your details and dispatch will reach out to set up delivery.</p>
         </div>
-        <form class="req" id="request" name="request" method="POST" data-netlify="true" netlify-honeypot="company">
+        <form class="req" id="request" name="request" method="POST" action="/api/contact">
+          <input type="hidden" name="_next" value="/thank-you.html">
           <input type="hidden" name="form-name" value="request">
-          <p hidden><label>Leave blank <input name="company"></label></p>
+          <p hidden><label>Leave blank <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
           <div class="req-row">
             <label><span>Name</span><input name="name" autocomplete="name" required></label>
             <label><span>Phone</span><input name="phone" type="tel" autocomplete="tel" required></label>
